@@ -4,14 +4,17 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { FaPhoneVolume } from "react-icons/fa";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
-import ContactInfo from "@/components/Content/ContactInfo.json";
+
+import contactContent from "@/app/Data/content";
+
+const ContactInfo: any = contactContent.contactContent;
 
 const Navbar = () => {
   const [nav, setNav] = useState(false);
   const handleNav = () => {
     setNav(!nav);
   };
-  const navLinks=["Home", "Locations", "Services", "About", "Blogs", "Contact"]
+  const navLinks=["Home", "Locations", "Services", "About", "Contact"]
   return (
     <>
       <nav className=" sticky   top-0 z-[999] flex h-[5rem]  w-screen items-center justify-center border-y-2 bg-white px-4 md:w-full md:px-0">

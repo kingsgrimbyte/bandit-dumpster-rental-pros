@@ -1,7 +1,7 @@
 {
   "No": "(530) 548-6019",
   "tel": "5305486019",
-  "mail": "info12@gmail.com",
+  "mail": "",
   "baseUrl": "https://junkbanditdumpsters.com/",
   "host": "junkbanditdumpsters.com",
   "name": "Covina Dumpster Rental Pros",
@@ -12,5 +12,7 @@
   "bannerImage": "https://ik.imagekit.io/z6skgnupx/uploads/2025/05/1747201233188-sorting-the-garbage-waste-the-three-color-trash_YadGrOUNzX.jpg",
   "logoImage": "https://ik.imagekit.io/h7rza8886p/Covina%20Dumpster%20Rental%20Pros.png?updatedAt=1750147928199",
   "googleAnalytics": "",
-  "favicon": "https://ik.imagekit.io/h7rza8886p/favicon.ico"
+  "favicon": "https://ik.imagekit.io/h7rza8886p/tampadumpsterfavicon.ico?updatedAt=1752814279933",
+  "minor": "#3a0b02",
+  "main": "#871a05"
 }
