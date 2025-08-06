@@ -24,6 +24,8 @@ const {
   logoImage = "",
   favicon = "",
   googleAnalytics = undefined,
+  minor = "#fed700",
+  main = "#283143",
 } = (contactDataJson as any) || {};
 
 const contactContent: any = {
@@ -41,6 +43,8 @@ const contactContent: any = {
   logoImage,
   favicon,
   googleAnalytics,
+  minor,
+  main
 };
 
 //About Content
@@ -97,8 +101,8 @@ const contactPageContent: any = {
   bannerImage: contactPageBannerImage,
   h1Banner: contactPageH1Banner,
   p1Banner: contactPageP1Banner,
-  h2:contacth2Image,
-  h2Image,
+  h2,
+  h2Image: contacth2Image,
   p2:contactp2,
   h3,
   p3,
@@ -250,6 +254,27 @@ const typesJsonContent: any = {
 };
 
 
+// Utility function to replace placeholders in strings
+function replacePlaceholders(obj: any, ContactInfo: any): any {
+  if (typeof obj === "string") {
+    return obj
+      .split("[location]").join(ContactInfo.location)
+      .split("[phone]").join(ContactInfo.No);
+  } else if (Array.isArray(obj)) {
+    return obj.map(item => replacePlaceholders(item, ContactInfo));
+  } else if (obj && typeof obj === "object") {
+    const result: any = {};
+    for (const key in obj) {
+      result[key] = replacePlaceholders(obj[key], ContactInfo);
+    }
+    return result;
+  }
+  return obj;
+}
+
+// Use contactContent as ContactInfo for replacements
+const ContactInfo = contactContent;
+
 const content: {
   aboutContent: any;
   contactContent: any;
@@ -260,14 +285,14 @@ const content: {
   servicePageContent: any;
   typesJsonContent: any;
 } = {
-  aboutContent,
-  contactContent,
-  contactPageContent,
-  homePageContent,
-  locationPageContent,
-  brandsContent,
-  servicePageContent,
-  typesJsonContent,
+  aboutContent: replacePlaceholders(aboutContent, ContactInfo),
+  contactContent: replacePlaceholders(contactContent, ContactInfo),
+  contactPageContent: replacePlaceholders(contactPageContent, ContactInfo),
+  homePageContent: replacePlaceholders(homePageContent, ContactInfo),
+  locationPageContent: replacePlaceholders(locationPageContent, ContactInfo),
+  brandsContent: replacePlaceholders(brandsContent, ContactInfo),
+  servicePageContent: replacePlaceholders(servicePageContent, ContactInfo),
+  typesJsonContent: replacePlaceholders(typesJsonContent, ContactInfo),
 };
 
 export default content;

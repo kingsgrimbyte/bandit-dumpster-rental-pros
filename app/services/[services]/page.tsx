@@ -83,9 +83,6 @@ const page = ({ params }: { params: { services: string } }) => {
           </div>
           {/* who */}
         </div>
-        {/* <div className="mx-auto my-4 w-80 border p-4">
-          <div dangerouslySetInnerHTML={{ __html: serviceData.description }} />
-        </div> */}
         <div className="my-20 bg-main text-white">
           <div className="text- mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
             <h2 className=" text-center text-3xl font-bold">
@@ -93,11 +90,7 @@ const page = ({ params }: { params: { services: string } }) => {
             </h2>
             <div
               className="mt-4 flex flex-wrap justify-center gap-4"
-            // dangerouslySetInnerHTML={{
-            //   __html: serviceData.p3
-            //     .split("[location]")
-            //     .join(locationName),
-            // }}
+         
             >
               {serviceData.p3.split("|").map((Item: string) => (
                 <p key={Item} className="m-2  rounded-md border  p-4 font-bold">
@@ -133,10 +126,3 @@ const page = ({ params }: { params: { services: string } }) => {
 };
 
 export default page;
-
-// export function generateStaticParams() {
-//   const cityData: any = Servicedata.lists;
-//   return cityData.map((locations: any) => ({
-//     services: locations.slug.toString(),
-//   }));
-// }
