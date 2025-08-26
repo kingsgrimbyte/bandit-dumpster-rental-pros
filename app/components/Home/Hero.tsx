@@ -6,7 +6,6 @@ import Faq from "./Faq";
 import Service from "@/app/components/Home/Service";
 import Affordable from "./Affordable";
 import ProcessWidget from "../Widgets/ProcessWidget";
-import AreaWeServe from "../Widgets/AreaWeServe";
 import ReviewWidget from "../Widgets/ReviewWidget";
 import Navbar from "../Navbar";
 import Link from "next/link";
@@ -22,8 +21,31 @@ const content: any = SubdomainContent.subdomainData;
 const Hero = () => {
   const cityData: any = content;
   const slugs: any = Object.keys(cityData).map((key) => cityData[key]);
+   const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: homeData.faq.map((faq: any) => ({
+      "@type": "Question",
+      name: faq?.FAQ?.split("[location]").join(
+        ContactInfo.location.split(",")[0].trim(),
+      ),
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq?.Answer?.split("[location]").join(
+          ContactInfo.location.split(",")[0].trim(),
+        ),
+      },
+    })),
+  };
+   
   return (
     <div className="">
+      {jsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      )}
       <Navbar />
       <div className="w-screen overflow-hidden  md:flex md:w-full md:flex-col md:items-center md:justify-center">
         <div className="w-full overflow-hidden text-lg  print:hidden  dark:bg-white dark:text-black">
@@ -146,7 +168,7 @@ const Hero = () => {
           <div className="mt-14 md:mt-20"></div>
           {/* CTA */}
           {/* FAQ */}
-          <Faq />
+          <Faq data={homeData?.faq}/>
           {/* FAQ */}
           {/* Review */}
           <ReviewWidget />
