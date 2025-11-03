@@ -19,10 +19,17 @@ const SubTypePage = ({ params }: any) => {
   const headersList = headers();
   const subdomain = headersList.get("x-subdomain");
   const Data: any = content[subdomain as keyof typeof content];
-  const locationName = Data?.name || ContactInfo.location;
+  
+  // Extract abbreviation from subdomain slug
+  const abbreviation = subdomain?.split("-").pop()?.toUpperCase();
+  
+  // Create location name with abbreviation if available
+  const locationName = Data?.name 
+    ? (abbreviation ? `${Data.name}, ${abbreviation}` : Data.name) 
+    : ContactInfo.location;
   const Servicedata = JSON.parse(
     JSON.stringify(data?.serviceData)
-      .split("[location]")
+      .split(ContactInfo.location)
       .join(locationName)
       .split("[phone]")
       .join(ContactInfo.No),
@@ -191,14 +198,14 @@ const SubTypePage = ({ params }: any) => {
                 <Link
                   href={`/types/${type.slug}`}
                   key={idx}
-                  className="group flex w-48 flex-col items-center rounded-lg border  border-gray-200 bg-gray-100 p-6 transition hover:bg-main hover:text-white "
+                  className="group flex w-48 flex-col items-center rounded-lg border  border-gray-200 bg-gray-100 p-6 transition hover:bg-main hover:text-white hover:shadow-lg"
                 >
                   <Image
                     src={serviceData.idealImage}
                     width={56}
                     height={56}
                     alt={type.title}
-                    className="mb-2 w-16 rounded-full  border-gray-200 object-cover "
+                    className="mb-2 w-16 rounded-full   object-cover "
                   />
                   <span className="text-center font-bold ">{type.title}</span>
                 </Link>

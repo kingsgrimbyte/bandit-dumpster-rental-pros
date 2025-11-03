@@ -22,12 +22,12 @@ export function generateMetadata({ params }: { params: { services: string } }) {
   const Data: any = content[subdomain as keyof typeof content];
   return {
     title: serviceData.title
-      ?.split("[location]")
+      ?.split(ContactInfo.location)
       .join(Data?.name || ContactInfo.location)
       ?.split("[phone]")
       .join(ContactInfo.No),
     description: serviceData.description
-      ?.split("[location]")
+      ?.split(ContactInfo.location)
       .join(Data?.name || ContactInfo.location)
       ?.split("[phone]")
       .join(ContactInfo.No),
@@ -50,10 +50,10 @@ const page = ({ params }: { params: { services: string } }) => {
       <NavbarState />
       <div className="">
         <Banner
-          h1={serviceData.title.split("[location]").join(locationName)}
+          h1={serviceData.title.split(ContactInfo.location).join(locationName)}
           header=""
           p1={serviceData.description
-            ?.split("[location]")
+            ?.split(ContactInfo.location)
             .join(Data?.name || ContactInfo.location)
             ?.split("[phone]")
             .join(ContactInfo.No)}
@@ -65,7 +65,7 @@ const page = ({ params }: { params: { services: string } }) => {
               <div className="text-3xl font-bold">
                 <h2>
                   {" "}
-                  {serviceData.title.split("[location]").join(locationName)}
+                  {serviceData.title.split(ContactInfo.location).join(locationName)}
                 </h2>
                 <br />
               </div>
@@ -73,7 +73,7 @@ const page = ({ params }: { params: { services: string } }) => {
                 className="text-justify "
                 dangerouslySetInnerHTML={{
                   __html: serviceData.p2
-                    ?.split("[location]")
+                    ?.split(ContactInfo.location)
                     .join(ContactInfo.location)
                     ?.split("[phone]")
                     .join(ContactInfo.No),
@@ -94,22 +94,12 @@ const page = ({ params }: { params: { services: string } }) => {
           </div>
           {/* who */}
         </div>
-        {/* <div className="mx-auto my-4 w-80 border p-4">
-          <div dangerouslySetInnerHTML={{ __html: serviceData.description }} />
-        </div> */}
         <div className="my-20 bg-main text-white">
           <div className="text- mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
             <h2 className=" text-center text-3xl font-bold">
-              {serviceData.h3.split("[location]").join(locationName)}
+              {serviceData.h3.split(ContactInfo.location).join(locationName)}
             </h2>
-            <div
-              className="mt-4 flex flex-wrap justify-center gap-4"
-              // dangerouslySetInnerHTML={{
-              //   __html: serviceData.p3
-              //     .split("[location]")
-              //     .join(locationName),
-              // }}
-            >
+            <div className="mt-4 flex flex-wrap justify-center gap-4">
               {serviceData.p3.split("|").map((Item: string) => (
                 <p key={Item} className="m-2  rounded-md border  p-4 font-bold">
                   {Item}
@@ -130,7 +120,7 @@ const page = ({ params }: { params: { services: string } }) => {
                 className="mt-4 "
                 dangerouslySetInnerHTML={{
                   __html: serviceData.seoContent
-                    ?.split("[location]")
+                    ?.split(ContactInfo.location)
                     .join(ContactInfo.location)
                     ?.split("[phone]")
                     .join(ContactInfo.No),
@@ -139,10 +129,16 @@ const page = ({ params }: { params: { services: string } }) => {
             </div>
           </div>
         )}
-        {/* <TypeOfDumpster /> */}
       </div>
     </div>
   );
 };
 
 export default page;
+
+// export function generateStaticParams() {
+//   const cityData: any = Servicedata.lists;
+//   return cityData.map((locations: any) => ({
+//     services: locations.slug.toString(),
+//   }));
+// }
